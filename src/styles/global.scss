@@ -1,0 +1,42 @@
+@import 'mixins';
+@import 'variables';
+
+body {
+  background: $background;
+  color: $text;
+  font-family: 'Open Sans', 'sans-serif';
+  font-size: 1.6rem;
+  font-weight: 300;
+  padding: 0 0 4rem;
+}
+
+:global {
+  .container {
+    margin: 0 auto;
+    max-width: $width;
+  }
+
+  .fade-in {
+    animation: fadeIn 400ms;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  hr {
+    display: block;
+    margin: 1rem 0;
+    border: 0;
+    border-bottom: 1px dashed #cecece;
+  }
+}
+
+@keyframes :global(fadeIn) {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
