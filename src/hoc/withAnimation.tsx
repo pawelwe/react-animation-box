@@ -14,17 +14,21 @@ export function withAnimation(WrappedComponent: any) {
   return class WithAnimation extends Component<Props, State> {
     public state = {
       show: true,
-      mount: true,
+      mount: this.props.in,
     };
 
     wrapperRef: any = React.createRef();
 
     private unmountComp = (): void => {
       console.info('unmounted...');
-      this.wrapperRef.current.removeEventListener(
-        'animationend',
-        this.unmountComp,
-      );
+
+      if (this.wrapperRef.current) {
+        this.wrapperRef.current.removeEventListener(
+          'animationend',
+          this.unmountComp,
+        );
+      }
+
       this.setState({
         mount: false,
       });
@@ -32,20 +36,24 @@ export function withAnimation(WrappedComponent: any) {
 
     componentDidUpdate(prevProps: any) {
       if (prevProps.in !== this.props.in) {
-        this.setState({
-          show: !this.state.show,
-        });
-
         if (!this.props.in) {
           console.info('unmounting...');
-          this.wrapperRef.current.addEventListener(
-            'animationend',
-            this.unmountComp,
-          );
+
+          if (this.wrapperRef.current) {
+            this.wrapperRef.current.addEventListener(
+              'animationend',
+              this.unmountComp,
+            );
+          }
+
+          this.setState({
+            show: false,
+          });
         } else {
           console.info('mounting...');
           this.setState({
             mount: true,
+            show: true,
           });
         }
       }

@@ -30,6 +30,10 @@ body {
     border: 0;
     border-bottom: 1px dashed #cecece;
   }
+
+  button {
+    cursor: pointer;
+  }
 }
 
 @keyframes :global(fadeIn) {
