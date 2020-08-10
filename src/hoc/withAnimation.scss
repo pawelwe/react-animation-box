@@ -1,12 +1,12 @@
 .fade-in {
   :global {
-    animation: fadeIn 400ms ease-out forwards;
+    animation: fadeIn 300ms ease-out forwards;
   }
 }
 
 .fade-out {
   :global {
-    animation: fadeOut 400ms ease-out forwards;
+    animation: fadeOut 300ms ease-out forwards;
   }
 }
 
