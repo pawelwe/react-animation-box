@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../styles/index.scss';
 
-import { AnimationBox } from '../../hoc/withAnimation';
+import { AnimationBox } from '../../hoc/AnimationBox';
 import { Box } from '../Box/Box';
 
 export const AnimationTest: React.FC = () => {

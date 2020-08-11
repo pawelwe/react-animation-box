@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo, useCallback, useRef } from 'react';
-import styles from './withAnimation.scss';
+import styles from './AnimationBox.scss';
 
 interface Props {
   in: boolean;
