@@ -1,73 +1,49 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, memo, useCallback, useRef } from 'react';
 import styles from './withAnimation.scss';
 
 interface Props {
   in: boolean;
+  children: any;
 }
 
-interface State {
-  show: boolean;
-  mount: boolean;
-}
+export const AnimationBox = memo<Props>(({ children, in: compIn }) => {
+  const [show, setShow] = useState(true);
+  const [mount, setMount] = useState(compIn);
 
-export function withAnimation(WrappedComponent: any) {
-  return class WithAnimation extends Component<Props, State> {
-    public state = {
-      show: true,
-      mount: this.props.in,
-    };
+  const wrapperRef: any = useRef(null);
 
-    wrapperRef: any = React.createRef();
+  const unmountComp = useCallback((): void => {
+    console.info('unmounted...');
 
-    private unmountComp = (): void => {
-      console.info('unmounted...');
-
-      if (this.wrapperRef.current) {
-        this.wrapperRef.current.removeEventListener(
-          'animationend',
-          this.unmountComp,
-        );
-      }
-
-      this.setState({
-        mount: false,
-      });
-    };
-
-    componentDidUpdate(prevProps: any) {
-      if (prevProps.in !== this.props.in) {
-        if (!this.props.in) {
-          console.info('unmounting...');
-
-          if (this.wrapperRef.current) {
-            this.wrapperRef.current.addEventListener(
-              'animationend',
-              this.unmountComp,
-            );
-          }
-
-          this.setState({
-            show: false,
-          });
-        } else {
-          console.info('mounting...');
-          this.setState({
-            mount: true,
-            show: true,
-          });
-        }
-      }
+    if (wrapperRef.current) {
+      wrapperRef.current.removeEventListener('animationend', unmountComp);
     }
 
-    public render() {
-      return this.state.mount ? (
-        <div
-          ref={this.wrapperRef}
-          className={this.state.show ? styles['fade-in'] : styles['fade-out']}
-        >
-          <WrappedComponent {...this.props} />
-        </div>
-      ) : null;
+    setMount(false);
+  }, [mount]);
+
+  useEffect(() => {
+    if (!compIn) {
+      console.info('unmounting...');
+
+      if (wrapperRef.current) {
+        wrapperRef.current.addEventListener('animationend', unmountComp);
+      }
+
+      setShow(false);
+    } else {
+      console.info('mounting...');
+      setShow(true);
+      setMount(true);
     }
-  };
-}
+  }, [compIn]);
+
+  return mount ? (
+    <div
+      ref={wrapperRef}
+      className={show ? styles['fade-in'] : styles['fade-out']}
+    >
+      {children}
+    </div>
+  ) : null;
+});
