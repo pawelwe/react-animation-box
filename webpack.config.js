@@ -9,9 +9,6 @@ module.exports = (env, argv) => {
   return {
     mode: argv.mode,
     devtool: devtool,
-    resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.css', '.scss'],
-    },
     module: {
       rules: [
         {
@@ -100,6 +97,9 @@ module.exports = (env, argv) => {
           ],
         },
       ],
+    },
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js', '.css', '.scss'],
     },
     plugins: [
       new HtmlWebPackPlugin({

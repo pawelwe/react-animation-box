@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export const useAnimation = (compIn: boolean, ref: any) => {
   const [show, setShow] = useState(true);
