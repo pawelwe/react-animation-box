@@ -15,7 +15,12 @@ export const useAnimation = (compIn: boolean, ref: any) => {
   }, [mount]);
 
   useEffect(() => {
-    if (!compIn) {
+    if (compIn) {
+      console.info('mounting...');
+
+      setShow(true);
+      setMount(true);
+    } else {
       console.info('unmounting...');
 
       if (ref.current) {
@@ -23,10 +28,6 @@ export const useAnimation = (compIn: boolean, ref: any) => {
       }
 
       setShow(false);
-    } else {
-      console.info('mounting...');
-      setShow(true);
-      setMount(true);
     }
   }, [compIn]);
 
