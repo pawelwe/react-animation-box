@@ -1,17 +1,19 @@
 .fade-in {
   :global {
     animation: fadeIn 500ms ease-out forwards;
-    transform: translate3d(0, 0, 0);
-    will-change: opacity;
   }
+
+  transform: translate3d(0, 0, 0);
+  will-change: opacity;
 }
 
 .fade-out {
   :global {
     animation: fadeOut 300ms ease-out forwards;
-    transform: translate3d(0, 0, 0);
-    will-change: opacity;
   }
+
+  transform: translate3d(0, 0, 0);
+  will-change: opacity;
 }
 
 @keyframes :global(fadeIn) {
