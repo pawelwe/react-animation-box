@@ -7,9 +7,7 @@ export const useAnimation = (compIn: boolean, ref: any) => {
   const unmountComp = useCallback((): void => {
     console.info('unmounted...');
 
-    if (ref.current) {
-      ref.current.removeEventListener('animationend', unmountComp);
-    }
+    ref.current.removeEventListener('animationend', unmountComp);
 
     setMount(false);
   }, [mount]);
