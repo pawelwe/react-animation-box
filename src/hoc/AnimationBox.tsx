@@ -19,7 +19,7 @@ interface Timeouts {
   out: number;
 }
 
-const calculateAnimationDurations = (compIn: boolean, timeouts: Timeouts) => {
+const calculateAnimationDuration = (compIn: boolean, timeouts: Timeouts) => {
   return compIn
     ? { animationDuration: `${timeouts.in}ms` }
     : { animationDuration: `${timeouts.out}ms` };
@@ -33,7 +33,7 @@ export const AnimationBox = memo<Props>(
 
     if (timeouts) {
       animationDuration = useMemo(
-        () => calculateAnimationDurations(compIn, timeouts),
+        () => calculateAnimationDuration(compIn, timeouts),
         [compIn, timeouts],
       );
     }
