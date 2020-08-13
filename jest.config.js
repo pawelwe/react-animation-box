@@ -1,14 +1,14 @@
 module.exports = {
   roots: ['<rootDir>/src'],
-  testRegex: '(/__tests__/.*|(\\.|/)(test))\\.js$',
-  moduleFileExtensions: ['js', 'jsx', 'json', 'node'],
+  moduleFileExtensions: ['js', 'jsx', 'json', 'node', 'ts', 'tsx'],
   testPathIgnorePatterns: ['/node_modules/', '/public/'],
   transformIgnorePatterns: ['/node_modules'],
   transform: {
     '\\.(js|jsx)?$': 'babel-jest',
+    '\\.(ts|tsx)?$': 'ts-jest',
     '\\.svg$': '<rootDir>/fileTransformer.js',
   },
   moduleNameMapper: {
-    '^.+\\.(css|less|scss)$': 'babel-jest',
+    ".+\\.(css|scss)$": "identity-obj-proxy"
   },
 };

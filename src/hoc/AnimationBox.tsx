@@ -19,7 +19,10 @@ interface Timeouts {
   out: number;
 }
 
-const calculateAnimationDuration = (compIn: boolean, timeouts: Timeouts) => {
+export const calculateAnimationDuration = (
+  compIn: boolean,
+  timeouts: Timeouts,
+) => {
   return compIn
     ? { animationDuration: `${timeouts.in}ms` }
     : { animationDuration: `${timeouts.out}ms` };
@@ -43,6 +46,7 @@ export const AnimationBox = memo<Props>(
         ref={wrapperRef}
         className={show ? styles['fade-in'] : styles['fade-out']}
         style={timeouts ? animationDuration : null}
+        data-testid="animation-box"
       >
         {children}
       </div>
