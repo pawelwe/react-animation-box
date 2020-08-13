@@ -1,6 +1,6 @@
 .fade-in {
   :global {
-    animation: fadeIn 500ms ease-out forwards;
+    animation: fadeIn 400ms ease-out forwards;
   }
 
   transform: translate3d(0, 0, 0);
@@ -9,7 +9,7 @@
 
 .fade-out {
   :global {
-    animation: fadeOut 300ms ease-out forwards;
+    animation: fadeOut 250ms ease-out forwards;
   }
 
   transform: translate3d(0, 0, 0);

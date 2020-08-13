@@ -1,6 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, MutableRefObject } from 'react';
 
-export const useAnimation = (compIn: boolean, ref: any) => {
+export const useAnimation = (
+  compIn: boolean,
+  ref: MutableRefObject<HTMLDivElement>,
+) => {
   const [show, setShow] = useState(true);
   const [mount, setMount] = useState(compIn);
 

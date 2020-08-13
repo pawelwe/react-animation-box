@@ -4,7 +4,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import { AnimationTest } from './components/AnimationTest/AnimationTest';
 import './styles/index.scss';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <ErrorBoundary>
       <AnimationTest />
