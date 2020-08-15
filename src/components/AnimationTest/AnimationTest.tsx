@@ -29,7 +29,7 @@ export const AnimationTest: React.FC = () => {
       </div>
       <div>
         <AnimationBox in={isBox3Visible} timeouts={{ in: 3000, out: 2500 }}>
-          <Box>BOX 1</Box>
+          <Box>BOX 3</Box>
         </AnimationBox>
         <button onClick={() => setBox3Visibility(!isBox3Visible)}>
           Toggle Box 3

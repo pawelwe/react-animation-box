@@ -1,9 +1,9 @@
 import React, {
   memo,
-  MutableRefObject,
   useRef,
-  ReactNode,
   useMemo,
+  MutableRefObject,
+  ReactNode,
 } from 'react';
 import { useAnimation } from '../hooks/useAnimation';
 import styles from './AnimationBox.scss';
