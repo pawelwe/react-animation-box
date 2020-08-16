@@ -7,7 +7,7 @@ body {
   font-family: 'Open Sans', 'sans-serif';
   font-size: 1.6rem;
   font-weight: 300;
-  padding: 0 0 4rem;
+  padding: 1rem;
 }
 
 :global {
@@ -33,6 +33,16 @@ body {
 
   button {
     cursor: pointer;
+  }
+
+  .box-wrapper {
+    display: flex;
+
+    > div {
+      flex: 1;
+      margin: 0 0.5rem 1rem;
+      text-align: center;
+    }
   }
 }
 
