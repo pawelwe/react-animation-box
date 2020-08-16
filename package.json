@@ -5,7 +5,8 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production",
-    "test": "jest --config ./jest.config.js --watchAll"
+    "test": "jest --config ./jest.config.js --watchAll",
+    "test:coverage": "jest --config ./jest.config.js --coverage"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",

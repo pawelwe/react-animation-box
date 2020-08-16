@@ -1,24 +1,3 @@
-export const saveData = (id: string, data: Object): object | void => {
-  try {
-    localStorage.setItem(id, JSON.stringify(data));
-    return data;
-  } catch (err) {
-    console.warn(err);
-  }
-};
-
-export const loadData = (id: string): object | void => {
-  try {
-    const data = JSON.parse(localStorage.getItem(id));
-    if (data === null) {
-      return undefined;
-    }
-    return data;
-  } catch (err) {
-    return undefined;
-  }
-};
-
 export const compareValues: (
   comparisionKey: string,
   sortOrder: string,

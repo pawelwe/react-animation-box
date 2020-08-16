@@ -6,9 +6,5 @@ interface Props {
 }
 
 export const Box: React.FC<Props> = ({ children }) => {
-  return (
-    <div className={styles['box']}>
-      <p>{children}</p>
-    </div>
-  );
+  return <div className={styles['box']}>{children}</div>;
 };
