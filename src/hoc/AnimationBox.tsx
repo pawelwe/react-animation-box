@@ -22,7 +22,7 @@ interface Timeouts {
 export const calculateAnimationDuration = (
   compIn: boolean,
   timeouts: Timeouts,
-) => {
+) : Object => {
   return compIn
     ? { animationDuration: `${timeouts.in}ms` }
     : { animationDuration: `${timeouts.out}ms` };

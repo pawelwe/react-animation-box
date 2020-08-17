@@ -8,6 +8,12 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "lib": ["dom", "es5", "es6", "esnext"],
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+  },
+  "exclude": [
+    "./src/**/*.test.ts",
+    "./src/**/*.test.tsx",
+    "node_modules",
+    "./dist/"
+  ]
 }
