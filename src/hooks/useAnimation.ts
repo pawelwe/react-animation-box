@@ -35,11 +35,11 @@ export const useAnimation = (
       console.info('animation canceled...');
 
       let root = document.documentElement;
-      const progressToOpacity =
-        percentage(currentTime - currentTime * 0.33, animationDuration) / 100;
+      const progressToOpacityDecimal =
+        percentage(currentTime, animationDuration) / 100;
 
+      root.style.setProperty('--opacity', `${progressToOpacityDecimal}`);
       ref.current.style.animationDuration = `${newDuration}s`;
-      root.style.setProperty('--opacity', `${progressToOpacity}`);
       ref.current.removeEventListener('animationcancel', handleCancel);
     },
     [ref.current],
