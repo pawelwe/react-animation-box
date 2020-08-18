@@ -49,7 +49,6 @@ export const useAnimation = (
             100;
 
           ref.current.style.animationDuration = `${newDuration}s`;
-
           root.style.setProperty('--opacity', `${progressToOpacity}`);
           ref.current.removeEventListener('animationcancel', handleCancel);
         });
