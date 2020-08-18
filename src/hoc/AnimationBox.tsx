@@ -19,10 +19,14 @@ interface Timeouts {
   out: number;
 }
 
+interface AnimationDuration {
+  animationDuration: string;
+}
+
 export const calculateAnimationDuration = (
   compIn: boolean,
   timeouts: Timeouts,
-) : Object => {
+): AnimationDuration => {
   return compIn
     ? { animationDuration: `${timeouts.in}ms` }
     : { animationDuration: `${timeouts.out}ms` };
