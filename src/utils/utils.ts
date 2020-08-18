@@ -22,3 +22,10 @@ export const compareValues: (
     return order === 'desc' ? comparison * -1 : comparison;
   };
 };
+
+export const getPercentageFromPartialValue = (
+  partialValue: number,
+  totalValue: number,
+): number => {
+  return (100 * partialValue) / totalValue;
+};

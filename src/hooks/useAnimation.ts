@@ -1,8 +1,5 @@
 import { useState, useEffect, useCallback, MutableRefObject } from 'react';
-
-function percentage(partialValue: number, totalValue: number) {
-  return (100 * partialValue) / totalValue;
-}
+import { getPercentageFromPartialValue } from '../utils/utils';
 
 export const useAnimation = (
   compIn: boolean,
@@ -36,7 +33,7 @@ export const useAnimation = (
 
       let root = document.documentElement;
       const progressToOpacityDecimal =
-        percentage(currentTime, animationDuration) / 100;
+        getPercentageFromPartialValue(currentTime, animationDuration) / 100;
 
       root.style.setProperty('--opacity', `${progressToOpacityDecimal}`);
       ref.current.style.animationDuration = `${newDuration}s`;
