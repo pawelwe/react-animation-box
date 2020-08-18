@@ -60,8 +60,8 @@ export const useAnimation = (
 
     return () => {
       if (ref.current) {
-        ref.current.removeEventListener('animationcancel', handleCancel);
         ref.current.removeEventListener('animationend', unmountComp);
+        ref.current.removeEventListener('animationcancel', handleCancel);
       }
     };
   }, [compIn]);
