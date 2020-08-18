@@ -57,6 +57,13 @@ export const useAnimation = (
         setShow(false);
       }
     }
+
+    return () => {
+      if (ref.current) {
+        ref.current.removeEventListener('animationcancel', handleCancel);
+        ref.current.removeEventListener('animationend', unmountComp);
+      }
+    };
   }, [compIn]);
 
   return {
