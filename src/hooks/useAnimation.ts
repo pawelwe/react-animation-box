@@ -11,15 +11,38 @@ export const useAnimation = (
   const [show, setShow] = useState(true);
   const [mount, setMount] = useState(compIn);
 
-  const unmountComp = useCallback(
-    (e): void => {
-      console.info('unmounted...');
+  const unmountComp = useCallback((): void => {
+    console.info('unmounted...');
 
-      ref.current.removeEventListener('animationend', unmountComp);
+    ref.current.removeEventListener('animationend', unmountComp);
 
-      setMount(false);
+    setMount(false);
+  }, [mount]);
+
+  const handleCancel = useCallback(
+    (e: AnimationEvent): void => {
+      const animationDuration = parseFloat(
+        window.getComputedStyle(ref.current).animationDuration,
+      );
+      const currentTime = e.elapsedTime;
+      const newDuration = currentTime.toFixed(2);
+
+      if (currentTime >= animationDuration) {
+        ref.current.removeEventListener('animationcancel', handleCancel);
+        return;
+      }
+
+      console.info('animation canceled...');
+
+      let root = document.documentElement;
+      const progressToOpacity =
+        percentage(currentTime - currentTime * 0.33, animationDuration) / 100;
+
+      ref.current.style.animationDuration = `${newDuration}s`;
+      root.style.setProperty('--opacity', `${progressToOpacity}`);
+      ref.current.removeEventListener('animationcancel', handleCancel);
     },
-    [mount],
+    [ref.current],
   );
 
   useEffect(() => {
@@ -33,26 +56,7 @@ export const useAnimation = (
 
       if (ref.current) {
         ref.current.addEventListener('animationend', unmountComp);
-        ref.current.addEventListener('animationcancel', function handleCancel(
-          e,
-        ) {
-          const animationDuration = parseFloat(
-            window.getComputedStyle(ref.current).animationDuration,
-          );
-          const currentTime = e.elapsedTime;
-          const newDuration = (animationDuration - currentTime).toFixed(2);
-
-          let root = document.documentElement;
-
-          const progressToOpacity =
-            percentage(currentTime - currentTime * 0.33, animationDuration) /
-            100;
-
-          ref.current.style.animationDuration = `${newDuration}s`;
-          root.style.setProperty('--opacity', `${progressToOpacity}`);
-          ref.current.removeEventListener('animationcancel', handleCancel);
-        });
-
+        ref.current.addEventListener('animationcancel', handleCancel);
         setShow(false);
       }
     }
