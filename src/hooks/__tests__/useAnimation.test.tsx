@@ -21,7 +21,7 @@ describe('useAnimation hook', () => {
 
     expect(current).toEqual({
       mount: false,
-      show: false,
+      show: true,
     });
   });
 });
