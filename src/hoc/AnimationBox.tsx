@@ -4,9 +4,11 @@ import React, {
   useMemo,
   MutableRefObject,
   ReactNode,
-} from 'react';
-import { useAnimation } from '../hooks/useAnimation';
-import styles from './AnimationBox.scss';
+} from "react";
+
+import styles from "./AnimationBox.scss";
+
+import { useAnimation } from "../hooks/useAnimation";
 
 interface Props {
   in: boolean;
@@ -25,7 +27,7 @@ interface AnimationDuration {
 
 export const calculateAnimationDuration = (
   compIn: boolean,
-  timeouts: Timeouts,
+  timeouts: Timeouts
 ): AnimationDuration => {
   return compIn
     ? { animationDuration: `${timeouts.in}ms` }
@@ -34,26 +36,28 @@ export const calculateAnimationDuration = (
 
 export const AnimationBox = memo<Props>(
   ({ children, in: compIn, timeouts }) => {
-    const wrapperRef: MutableRefObject<HTMLDivElement> = useRef(null);
+    const wrapperRef = useRef<HTMLDivElement | null>(null);
     const { mount, show } = useAnimation(compIn, wrapperRef);
     let animationDuration;
 
     if (timeouts) {
       animationDuration = useMemo(
         () => calculateAnimationDuration(compIn, timeouts),
-        [compIn, timeouts],
+        [compIn, timeouts]
       );
     }
 
     return mount ? (
       <div
         ref={wrapperRef}
-        className={show ? styles['fade-in'] : styles['fade-out']}
-        style={timeouts ? animationDuration : null}
+        className={show ? styles["fade-in"] : styles["fade-out"]}
+        style={timeouts ? animationDuration : undefined}
         data-testid="animation-box"
       >
         {children}
       </div>
     ) : null;
-  },
+  }
 );
+
+AnimationBox.displayName = "AnimationBox";

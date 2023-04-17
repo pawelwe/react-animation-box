@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-
-interface Props {}
+import React, { Component } from "react";
 
 interface StateProps {
   hasError: boolean;
 }
 
-class ErrorBoundary extends Component<Props, StateProps> {
+class ErrorBoundary extends Component<any, StateProps> {
   state = { hasError: false };
 
   static getDerivedStateFromError() {

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { AnimationBox } from '../../hoc/AnimationBox';
-import { Box } from '../Box/Box';
-import { Button } from '../Button/Button';
-import '../../styles/index.scss';
+import React, { useState } from "react";
+
+import { AnimationBox } from "../../hoc/AnimationBox";
+import { Box } from "../Box/Box";
+import { Button } from "../Button/Button";
+import "../../styles/index.scss";
 
 export const AnimationTest: React.FC = () => {
   const [isBox1Visible, setBox1Visibility] = useState(true);
@@ -17,7 +18,7 @@ export const AnimationTest: React.FC = () => {
             <Box>BOX 1</Box>
           </AnimationBox>
           <Button
-            text={isBox1Visible ? 'Hide Box 1' : 'Show Box 1'}
+            text={isBox1Visible ? "Hide Box 1" : "Show Box 1"}
             handleClick={() => setBox1Visibility(!isBox1Visible)}
           />
         </div>
@@ -26,7 +27,7 @@ export const AnimationTest: React.FC = () => {
             <Box>BOX 2</Box>
           </AnimationBox>
           <Button
-            text={isBox2Visible ? 'Hide Box 2' : 'Show Box 2'}
+            text={isBox2Visible ? "Hide Box 2" : "Show Box 2"}
             handleClick={() => setBox2Visibility(!isBox2Visible)}
           />
         </div>
@@ -35,7 +36,7 @@ export const AnimationTest: React.FC = () => {
             <Box>BOX 3</Box>
           </AnimationBox>
           <Button
-            text={isBox3Visible ? 'Hide Box 3' : 'Show Box 3'}
+            text={isBox3Visible ? "Hide Box 3" : "Show Box 3"}
             handleClick={() => setBox3Visibility(!isBox3Visible)}
           />
         </div>

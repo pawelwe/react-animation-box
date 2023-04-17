@@ -1,5 +1,6 @@
-import React from 'react';
-import styles from './Button.scss';
+import React from "react";
+
+import styles from "./Button.scss";
 
 interface Props {
   handleClick: () => void;
@@ -8,7 +9,7 @@ interface Props {
 
 export const Button: React.FC<Props> = ({ handleClick, text }) => {
   return (
-    <button className={styles['button']} onClick={handleClick}>
+    <button className={styles["button"]} onClick={handleClick}>
       {text}
     </button>
   );

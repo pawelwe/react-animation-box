@@ -1,17 +1,18 @@
-import { useState, useEffect, useCallback, MutableRefObject } from 'react';
-import { getPercentageFromPartialValue } from '../utils/utils';
+import { useState, useEffect, useCallback, MutableRefObject } from "react";
+import { getPercentageFromPartialValue } from "../utils/utils";
 
 export const useAnimation = (
   compIn: boolean,
-  ref: MutableRefObject<HTMLDivElement>,
+  // TODO
+  ref: MutableRefObject<HTMLDivElement | any>
 ) => {
   const [show, setShow] = useState(true);
   const [mount, setMount] = useState(compIn);
 
   const unmountComp = useCallback((): void => {
-    console.info('unmounted...');
+    console.info("unmounted...");
 
-    ref.current.removeEventListener('animationend', unmountComp);
+    ref?.current?.removeEventListener("animationend", unmountComp);
 
     setMount(false);
   }, [mount]);
@@ -19,52 +20,52 @@ export const useAnimation = (
   const handleCancel = useCallback(
     (e: AnimationEvent): void => {
       const animationDuration = parseFloat(
-        window.getComputedStyle(ref.current).animationDuration,
+        window.getComputedStyle(ref.current).animationDuration
       );
       const currentTime = e.elapsedTime;
       const newDuration = currentTime.toFixed(2);
 
       if (currentTime >= animationDuration) {
-        ref.current.removeEventListener('animationcancel', handleCancel);
+        ref.current.removeEventListener("animationcancel", handleCancel);
         return;
       }
 
-      console.info('animation canceled...');
+      console.info("animation canceled...");
 
-      let root = document.documentElement;
+      const root = document.documentElement;
       const progressToOpacityDecimal =
         getPercentageFromPartialValue(currentTime, animationDuration) / 100;
 
-      root.style.setProperty('--opacity', `${progressToOpacityDecimal}`);
+      root.style.setProperty("--opacity", `${progressToOpacityDecimal}`);
       ref.current.style.animationDuration = `${newDuration}s`;
-      ref.current.removeEventListener('animationcancel', handleCancel);
+      ref.current.removeEventListener("animationcancel", handleCancel);
     },
-    [ref.current],
+    [ref.current]
   );
 
   useEffect(() => {
     if (compIn) {
-      console.info('mounting...');
+      console.info("mounting...");
 
       setShow(true);
       setMount(true);
     } else {
-      console.info('unmounting...');
+      console.info("unmounting...");
 
       if (ref.current) {
-        ref.current.addEventListener('animationend', unmountComp);
-        ref.current.addEventListener('animationcancel', handleCancel);
+        ref.current.addEventListener("animationend", unmountComp);
+        ref.current.addEventListener("animationcancel", handleCancel);
         setShow(false);
       }
     }
 
     return () => {
       if (ref.current) {
-        ref.current.removeEventListener('animationend', unmountComp);
-        ref.current.removeEventListener('animationcancel', handleCancel);
+        ref.current.removeEventListener("animationend", unmountComp);
+        ref.current.removeEventListener("animationcancel", handleCancel);
       }
     };
-  }, [compIn]);
+  }, [compIn, ref.current]);
 
   return {
     mount,
