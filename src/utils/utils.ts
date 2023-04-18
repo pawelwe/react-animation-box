@@ -28,5 +28,5 @@ export const getPercentageFromPartialValue = (
   partialValue: number,
   totalValue: number
 ): number => {
-  return (100 * partialValue) / totalValue;
+  return partialValue / totalValue;
 };

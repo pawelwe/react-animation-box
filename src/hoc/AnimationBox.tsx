@@ -1,10 +1,4 @@
-import React, {
-  memo,
-  useRef,
-  useMemo,
-  MutableRefObject,
-  ReactNode,
-} from "react";
+import React, { memo, useRef, useMemo, ReactNode } from "react";
 
 import styles from "./AnimationBox.scss";
 

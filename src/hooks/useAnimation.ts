@@ -3,8 +3,7 @@ import { getPercentageFromPartialValue } from "../utils/utils";
 
 export const useAnimation = (
   compIn: boolean,
-  // TODO
-  ref: MutableRefObject<HTMLDivElement | any>
+  ref: MutableRefObject<HTMLDivElement | null>
 ) => {
   const [show, setShow] = useState(true);
   const [mount, setMount] = useState(compIn);
@@ -12,35 +11,41 @@ export const useAnimation = (
   const unmountComp = useCallback((): void => {
     console.info("unmounted...");
 
-    ref?.current?.removeEventListener("animationend", unmountComp);
+    if (ref.current !== null) {
+      ref.current.removeEventListener("animationend", unmountComp);
+    }
 
     setMount(false);
   }, [mount]);
 
   const handleCancel = useCallback(
     (e: AnimationEvent): void => {
-      const animationDuration = parseFloat(
-        window.getComputedStyle(ref.current).animationDuration
-      );
-      const currentTime = e.elapsedTime;
-      const newDuration = currentTime.toFixed(2);
+      if (ref.current !== null) {
+        const animationDuration = parseFloat(
+          window.getComputedStyle(ref.current).animationDuration
+        );
+        const currentTime = e.elapsedTime;
+        const newDuration = currentTime.toFixed(2);
 
-      if (currentTime >= animationDuration) {
+        if (currentTime >= animationDuration) {
+          ref.current.removeEventListener("animationcancel", handleCancel);
+          return;
+        }
+
+        console.info("animation canceled...");
+
+        const root = document.documentElement;
+        const progressToOpacityDecimal = getPercentageFromPartialValue(
+          currentTime,
+          animationDuration
+        );
+
+        root.style.setProperty("--opacity", `${progressToOpacityDecimal}`);
+        ref.current.style.animationDuration = `${newDuration}s`;
         ref.current.removeEventListener("animationcancel", handleCancel);
-        return;
       }
-
-      console.info("animation canceled...");
-
-      const root = document.documentElement;
-      const progressToOpacityDecimal =
-        getPercentageFromPartialValue(currentTime, animationDuration) / 100;
-
-      root.style.setProperty("--opacity", `${progressToOpacityDecimal}`);
-      ref.current.style.animationDuration = `${newDuration}s`;
-      ref.current.removeEventListener("animationcancel", handleCancel);
     },
-    [ref.current]
+    [ref]
   );
 
   useEffect(() => {
@@ -65,7 +70,7 @@ export const useAnimation = (
         ref.current.removeEventListener("animationcancel", handleCancel);
       }
     };
-  }, [compIn, ref.current]);
+  }, [compIn, ref]);
 
   return {
     mount,
